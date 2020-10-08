@@ -11,7 +11,7 @@ A simple utility for searching for packages on the AUR.
 Clone this repo and make the script file executable:
 
 ```
-git clone https://www.github.com/icorbrey/sauron ~/.sauron
+git clone https://github.com/icorbrey/sauron ~/.sauron
 cd ~/.sauron
 chmod +x sauron
 export PATH="$PATH:/home/<user>/.sauron"
