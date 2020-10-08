@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+
+import arg
+import aur
+
+
+def get_operand():
+    return arg.at(2)
+
+
+def sort_packages(package):
+    return package.name
+
+
+def search():
+    packages = aur.search(get_operand())
+    packages.sort(key=sort_packages)
+    for package in packages:
+        print(package.name)
+
+
+def view():
+    package = aur.info(get_operand())
+    print(package.name, '(' + package.version + ')',
+          '-', package.description, '\n')
+    print('url:          ', package.url)
+    print('maintainer:   ', package.maintainer)
+    print('license:      ', package.license)
+    print('last modified:', package.last_modified)
+    print('votes:        ', package.num_votes)
+
+
+def help_message():
+    print('Usage: sauron [command] <[package]>\n')
+    print('search: Search the AUR for a package')
+    print('view:   View package details.')
+    print('help:   See this help message.')
+
+
+commands = {
+    'search': search,
+    'view': view,
+    'help': help_message,
+}
+
+
+def main():
+    get_command()()
+
+
+def get_command():
+    return commands.get(
+        arg.at(1),
+        help_message
+    )
+
+
+if __name__ == '__main__':
+    main()
